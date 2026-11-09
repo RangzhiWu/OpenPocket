@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- The native API validates HTTP hosts as private/loopback IPs. The local
+         terminal WebView blocks network requests and loads packaged assets only. -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

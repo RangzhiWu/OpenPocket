@@ -1,0 +1,14 @@
+{
+  "name": "openpocket-development-tools",
+  "private": true,
+  "version": "0.3.0",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node test-terminal.cjs",
+    "build:pinyin": "node build-pinyin.cjs"
+  },
+  "devDependencies": {
+    "pinyin": "2.11.2",
+    "playwright": "1.56.1"
+  }
+}

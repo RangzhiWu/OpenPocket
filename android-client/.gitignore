@@ -1,0 +1,10 @@
+.gradle/
+**/build/
+local.properties
+*.jks
+*.keystore
+signing.properties
+.emulator/
+.test-secrets/
+.build-user/
+artifacts/

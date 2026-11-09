@@ -1,0 +1,4 @@
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#172021}
+#terminal{height:100%;width:100%;padding:6px;box-sizing:border-box;touch-action:none;overscroll-behavior:none}
+.xterm{height:100%}.xterm .xterm-viewport{scrollbar-width:thin}
+.xterm-helper-textarea{font-size:16px!important}

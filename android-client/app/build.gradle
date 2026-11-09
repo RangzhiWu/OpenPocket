@@ -1,0 +1,41 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'cn.openpocket.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'cn.openpocket.app'
+        minSdk 26
+        targetSdk 34
+        versionCode 3
+        versionName '0.3.0'
+        testInstrumentationRunner 'cn.openpocket.app.SmokeInstrumentation'
+    }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    buildFeatures { buildConfig true }
+    if (System.getenv('OPENPOCKET_KEYSTORE')) {
+        signingConfigs {
+            release {
+                storeFile file(System.getenv('OPENPOCKET_KEYSTORE'))
+                storePassword System.getenv('OPENPOCKET_STORE_PASS')
+                keyAlias 'openpocket'
+                keyPassword System.getenv('OPENPOCKET_STORE_PASS')
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.release
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+    implementation('io.socket:socket.io-client:2.1.2') {
+        exclude group: 'org.json', module: 'json'
+    }
+}

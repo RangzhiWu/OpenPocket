@@ -1,0 +1,3 @@
+Offline reverse pinyin dictionary derived from npm pinyin 2.11.2, hotoo/pinyin, MIT.
+Source: https://registry.npmjs.org/pinyin/-/pinyin-2.11.2.tgz
+Built by scripts/build-pinyin.cjs. Fixed candidate ordering; no learning or input history.
