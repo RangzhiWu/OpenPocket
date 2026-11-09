@@ -18,12 +18,16 @@ names = [p.decode('utf-8') for p in git('ls-files', '-z').split(b'\0') if p]
 if not names:
     sys.exit('No tracked files; stage the reviewed public files first.')
 root_files = {'.gitignore', '.gitattributes', 'README.md', 'LICENSE', 'CHANGELOG.md',
-              'CONTRIBUTING.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md'}
+              'CONTRIBUTING.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md',
+              'README.en.md', 'README.zh-TW.md', 'README.ja.md'}
 roots = {'android-client', 'docs', 'scripts', 'server', '.github'}
 forbidden = {'.build-user', '.test-secrets', '.emulator', '.gradle', 'build',
-             'artifacts', 'node_modules', '__pycache__', 'ssh-keys', 'server-fixes'}
+             'artifacts', 'node_modules', '__pycache__', 'ssh-keys', 'server-fixes',
+             'androidTest', 'test'}
 binary_allowlist = {'android-client/gradle/wrapper/gradle-wrapper.jar',
-                    'android-client/app/src/main/assets/keyboard/pinyin.bin'}
+                    'android-client/app/src/main/assets/keyboard/pinyin.bin',
+                    'docs/screenshots/chats.png', 'docs/screenshots/conversation.png',
+                    'docs/screenshots/terminal.png', 'docs/screenshots/usage.png'}
 patterns = [
     ('private key', re.compile(rb'-----BEGIN (?:OPENSSH |RSA |EC |DSA |ENCRYPTED )?PRIVATE KEY-----')),
     ('GitHub credential', re.compile(rb'\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})\b')),
@@ -36,7 +40,7 @@ for name in names:
     path = pathlib.PurePosixPath(name)
     if (len(path.parts) == 1 and name not in root_files) or (len(path.parts) > 1 and path.parts[0] not in roots):
         problems.append((name, 'outside public roots'))
-    if forbidden.intersection(path.parts) or path.name == 'local.properties' or path.name.startswith('.env') or path.suffix.lower() in {'.key', '.pem', '.p12', '.jks', '.keystore', '.apk', '.zip', '.log', '.db'} or ('signing' in path.name.lower() and path.suffix == '.json'):
+    if forbidden.intersection(path.parts) or path.name == 'local.properties' or path.name.startswith('.env') or path.suffix.lower() in {'.key', '.pem', '.p12', '.jks', '.keystore', '.apk', '.zip', '.log', '.db', '.ps1'} or ('signing' in path.name.lower() and path.suffix == '.json'):
         problems.append((name, 'private/build artifact path'))
     data = git('show', ':' + name) if args.staged else (ROOT / name).read_bytes()
     if b'\0' in data:

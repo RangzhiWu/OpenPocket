@@ -24,9 +24,6 @@ OkHttp: Copyright (C) 2012 Square, Inc.；Okio: Copyright (C) 2014 Square, Inc.�
 ## 开发与测试
 
 - Gradle Wrapper 8.11.1：[Gradle 许可](docs/licenses/gradle.txt)，包括 Apache-2.0 与该上游发行说明所列第三方条款。完整 Gradle 发行包由 Wrapper 下载，不随 APK 打包。
-- JUnit 4.13.2：EPL-1.0，[许可](docs/licenses/junit.txt)，仅测试使用。
-- JSON-java 20240303：Public Domain，[原声明](docs/licenses/json-java.txt)，仅 JVM 测试使用。
-- Playwright 1.56.1：Apache-2.0，开发依赖通过 npm 安装，不随 APK 分发；其浏览器按各自许可安装。
 - Android Gradle Plugin / Android SDK / JDK：由开发者单独安装并遵守各工具许可，不纳入项目 MIT 授权。
 
 第三方 JavaScript 保留原始许可证文件与源码头。后续升级依赖时应同步检查许可与版本。

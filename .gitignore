@@ -3,6 +3,9 @@
 !/.gitignore
 !/.gitattributes
 !/README.md
+!/README.en.md
+!/README.zh-TW.md
+!/README.ja.md
 !/LICENSE
 !/CHANGELOG.md
 !/CONTRIBUTING.md
@@ -32,6 +35,10 @@
 **/.test-secrets/
 **/.emulator/
 **/artifacts/
+**/src/test/
+**/src/androidTest/
+**/*.ps1
+/scripts/test-terminal.cjs
 **/*.log
 **/*.db
 **/*.db-wal

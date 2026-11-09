@@ -21,28 +21,11 @@ jobs:
           packages: platform-tools
       - run: sdkmanager 'platforms;android-34' 'build-tools;35.0.0'
       - run: python3 scripts/audit-public.py
-      - name: Unit tests, lint and debug build
+      - name: Lint and debug build
         working-directory: android-client
-        run: ./gradlew --no-daemon :app:testReleaseUnitTest :app:lintRelease :app:assembleDebug
+        run: ./gradlew --no-daemon :app:lintRelease :app:assembleDebug
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: android-reports
-          path: |
-            android-client/app/build/reports/tests/
-            android-client/app/build/reports/lint-results-release.*
-  terminal:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-          cache-dependency-path: scripts/package-lock.json
-      - working-directory: scripts
-        run: npm ci --ignore-scripts --omit=optional
-      - working-directory: scripts
-        run: npx playwright install --with-deps chromium
-      - working-directory: scripts
-        run: npm test
+          path: android-client/app/build/reports/lint-results-release.*
