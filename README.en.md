@@ -19,7 +19,23 @@ Native Android client · Offline chat history · Interactive terminal · Offline
 
 OpenPocket is for people who run their own Open WebUI server. Continue desktop conversations on your phone, inspect server tasks and tool output, read saved history offline, or open an interactive terminal.
 
-> **Before connecting:** terminal access, background tasks, and usage statistics require matching server APIs. This repository contains the Android client and a few optional terminal helpers, not a complete Agent, Open WebUI, or OpenTerminal deployment. Different Open WebUI versions may lack some extensions. Read the [server requirements](docs/server-compatibility.md) first.
+> **Built for a customized Open WebUI deployment.** OpenPocket was developed alongside the maintainer's modified Open WebUI server. Full functionality depends on its Agent integrations, background tasks, saved tool output, usage records, and terminal environment. Installing the APK does not add those capabilities to a stock server. This repository publishes the client and a few terminal helpers; the complete backend modifications and a one-click deployment package are not currently published. Read the [backend customization guide](docs/backend-customizations.md) and [API requirements](docs/server-compatibility.md) first; both guides are currently in Simplified Chinese.
+
+## How it relates to Open WebUI
+
+The project began by customizing a personal Open WebUI deployment, then building a mobile client for it. The server connects models or Agents, runs tasks, saves results, and proxies authenticated access to OpenTerminal. The phone handles presentation, input, and local storage. Screenshots demonstrate that setup; they are not a compatibility guarantee for stock Open WebUI.
+
+| Feature | Provided by the Android client | Required from the server |
+| --- | --- | --- |
+| Login, models, conversations | Native screens, per-chat model selection, offline snapshots | Compatible authentication, model and chat APIs; partial updates preserve other fields |
+| Task assistant / coding Agents | Select server-provided models; display progress, reasoning, and tool cards | Agent adapters, background execution, persisted messages, and live events; not installed with the APK |
+| Tool output | Expand and copy existing results | Persist commands and results as messages; the maintainer's deployment includes tool-event and terminal-text adaptations |
+| Usage | Charts, persistent local cache, one-minute request reuse | Record and aggregate actual model / Agent usage; the deployment includes usage collection fixes and historical recovery |
+| Interactive terminal | xterm.js, control keys, Chinese input, copy and scrolling | OpenTerminal proxy, controlling PTY, Bash and installed CLIs; current resizing also requires the supplied helpers and permissions |
+
+**Verify stock Open WebUI one interface at a time.** Even basic APIs can differ across versions, and no stock release compatibility list has been verified. These requirements do not mean every feature needs an upstream code change: reuse an existing implementation if its API and behavior match. Installing the APK or copying `server/terminal/` alone cannot reproduce the complete deployment.
+
+The Android app can be built independently from this repository. Reproducing the full service also requires a compatible backend. The [detailed guide](docs/backend-customizations.md) separates known server adaptations, code not included in this repository, and deployment checks.
 
 ## Screenshots
 
@@ -98,7 +114,7 @@ See [privacy](docs/privacy.md) and [security](SECURITY.md).
 
 **Does it work with every Open WebUI installation?**
 
-There is no comprehensive upstream-version compatibility matrix yet. Basic chat and extended terminal/task/usage APIs have different requirements. Verify your deployment with a test account first.
+This client was developed for the maintainer's customized deployment, and the full backend modifications are not published here. No stock-version compatibility list has been verified. Read the [customization guide](docs/backend-customizations.md), then check both basic chat and extended APIs with a test account.
 
 **Why is a conversation unavailable offline?**
 
@@ -152,6 +168,8 @@ README*.md         Project introductions in multiple languages
 - Full-screen CLI behavior depends on the device WebView, server PTY, and program. Not every combination has been tested.
 
 ## Contributing and license
+
+Coding agents should first read [AGENTS.md](AGENTS.md), the project handover guide covering architecture, behavior requirements, verification, and publication boundaries (currently in Simplified Chinese).
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md); report vulnerabilities according to [SECURITY.md](SECURITY.md). See [CHANGELOG.md](CHANGELOG.md) for releases.
 

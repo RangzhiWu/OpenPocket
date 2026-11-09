@@ -2,6 +2,8 @@
 
 公开仓库包含应用源码、构建配置和必要资源。测试夹具、真机调试资料与维护者的 PowerShell 构建安装脚本不随公开源码分发，构建应用无需这些文件。
 
+开始修改前阅读根目录 [AGENTS.md](../AGENTS.md) 和 [服务端改造说明](backend-customizations.md)。本项目基于维护者改造的 Open WebUI 环境开发；客户端可独立构建，但完整后端改造尚未随仓库提供，构建成功不等于原版服务器可用全部功能。
+
 ## 环境与构建
 
 需要 JDK 17、Android SDK Platform 34、Build Tools 35.0.0。设置 `JAVA_HOME`、`ANDROID_HOME`，或在 `android-client/local.properties` 中设置 `sdk.dir`；该文件不提交。

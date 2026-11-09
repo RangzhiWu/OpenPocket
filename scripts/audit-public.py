@@ -17,7 +17,7 @@ def git(*command):
 names = [p.decode('utf-8') for p in git('ls-files', '-z').split(b'\0') if p]
 if not names:
     sys.exit('No tracked files; stage the reviewed public files first.')
-root_files = {'.gitignore', '.gitattributes', 'README.md', 'LICENSE', 'CHANGELOG.md',
+root_files = {'.gitignore', '.gitattributes', 'README.md', 'AGENTS.md', 'LICENSE', 'CHANGELOG.md',
               'CONTRIBUTING.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md',
               'README.en.md', 'README.zh-TW.md', 'README.ja.md'}
 roots = {'android-client', 'docs', 'scripts', 'server', '.github'}
